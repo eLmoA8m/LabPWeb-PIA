@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <div class="calendar-container">
+    <h1>Próximos partidos</h1>
+
+    <div class="select-container">
+      <label for="jornada-select">Seleccionar jornada:</label>
+      <select id="jornada-select" onchange="cambiarJornada()">
+        <option value="0">Mostrar todas las jornadas</option>
+      </select>
+    </div>
+
+    <table id="calendar">
+      <thead>
+        <tr>
+          <th>Equipo local</th>
+          <th>VS</th>
+          <th>Equipo visitante</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody id="calendar-body">
+        <!-- Aquí se generarán las filas de los partidos dinámicamente con JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="jornadas-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
