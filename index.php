@@ -26,7 +26,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Calendario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tabla de posiciones</a>
+                        <a class="nav-link" href="./navegacion/tabla-posiciones.php">Tabla de posiciones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Estadísticas</a>
