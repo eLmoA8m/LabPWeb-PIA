@@ -36,9 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $sqlActualizar = "UPDATE equipos SET nombre_equipo = '$nombreEquipo', representante = '$representante' WHERE id_equipo = $idEquipo";
         if (mysqli_query($conn, $sqlActualizar)) {
-            echo "Equipo actualizado exitosamente";
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Equipo actualizado correctamente
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
         } else {
-            echo "Error al actualizar el equipo: " . mysqli_error($conn);
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">Error al actualziar equipo: ' . mysqli_error($conn) . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
         }
     } else {
         $sqlInsertar = "INSERT INTO equipos (nombre_equipo, representante, logo) VALUES ('$nombreEquipo', '$representante', '$logo')";
@@ -66,6 +70,7 @@ if (isset($_GET['eliminar'])) {
     $idEquipo = $_GET['eliminar'];
     $sqlEliminar = "DELETE FROM equipos WHERE id_equipo = $idEquipo";
     mysqli_query($conn, $sqlEliminar);
+    
 }
 
 if (isset($_GET['editar'])) {
@@ -115,7 +120,7 @@ if (isset($_GET['editar'])) {
         </form>
     </div>
 
-    <div class="container2">
+    <div class="container">
         <h1>Equipos</h1>
         <table class="table">
             <thead>

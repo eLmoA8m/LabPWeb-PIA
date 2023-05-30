@@ -1,3 +1,47 @@
+<?php
+session_start();
+
+include "../clases/Conexion.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = $_POST['usuario'];
+    $password = $_POST['password'];
+
+    class Auth extends Conexion {
+        public function iniciarSesion($usuario, $password) {
+            $conexion = $this->Conectar();
+            $sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?";
+            $query = $conexion->prepare($sql);
+            $query->bind_param('ss', $usuario, $password);
+            $query->execute();
+            $result = $query->get_result();
+            $usuarioEncontrado = $result->fetch_assoc();
+
+            if ($usuarioEncontrado) {
+                $_SESSION['id'] = $usuarioEncontrado['id'];
+                $_SESSION['nombre'] = $usuarioEncontrado['nombre'];
+                $_SESSION['rol'] = $usuarioEncontrado['id_rol'];
+
+                // Redirigir según el id_rol
+                if ($_SESSION['rol'] == 1) {
+                    header("location: ../index.php");
+                } elseif ($_SESSION['rol'] == 2) {
+                    header("location: ../paginasAdministrativas/agregarEquipo.php");
+                } else {
+                    echo "Rol de usuario desconocido";
+                }
+                exit;
+            } else {
+                echo "Credenciales incorrectas";
+            }
+        }
+    }
+
+    $Auth = new Auth();
+    $Auth->iniciarSesion($usuario, $password);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +63,9 @@
 					<h2 class="login-heading mb-4 text-center">Iniciar sesión</h2>
 					
 					<!-- Sign In Form -->
-					<form>
+					<form method="POST">
 					  <div class="form-floating mb-3">
-						<input type="email" class="form-control" id="usuario" placeholder="Ingrese su usuario">
+						<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su usuario">
 						<label for="usuario">Usuario</label>
 					  </div>
 					  <div class="form-floating mb-3">
@@ -30,10 +74,10 @@
 					  </div>
 	  
 					  <div class="d-grid">
-						<button class="btn btn-lg btn-success btn-login text-uppercase fw-bold mb-2" type="submit">Ingresar</button>
-						<div class="text-center">
-						  <a class="small" href="registro.php">Registrarse aquí</a>
-						</div>
+							<button class="btn btn-lg btn-success btn-login text-uppercase fw-bold mb-2" type="submit">Ingresar</button>
+							<div class="text-center">
+							  <a class="small" href="registro.php">Registrarse aquí</a>
+							</div>
 					  </div>
 	  
 					</form>

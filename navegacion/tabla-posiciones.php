@@ -26,7 +26,32 @@
             </tr>
         </thead>
         <tbody>
-            <?php include('../servidor/tabla-posiciones/crearTablaEquipos.php')?>
+            <?php
+            
+            include "../clases/Conexion.php";
+           
+            // Realizar la consulta a la base de datos
+            $conexion = new Conexion();
+            $conn = $conexion->Conectar();
+            if (!$conn) {
+                die("Conexión fallida: " . mysqli_connect_error());
+            }
+            
+            $sql = "SELECT * FROM equipos";
+            $resultado = mysqli_query($conn, $sql);
+
+            // Iterar sobre los resultados y generar las filas de la tabla
+            while ($row = mysqli_fetch_assoc($resultado)){
+                echo "<tr>";
+                echo "<td>{$row['nombre_equipo']}</td>";
+              // echo "<td>{$row['pj']}</td>";
+                // echo "<td>{$row['pg']}</td>";
+               //  echo "<td>{$row['pe']}</td>";
+              //   echo "<td>{$row['pp']}</td>";
+              //   echo "<td>{$row['puntos']}</td>";
+                // echo "</tr>";
+            }
+            ?>
         </tbody>
     </table>
     </div>

@@ -13,7 +13,6 @@
 </head>
 
 <body>
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 
 <body>
   <div class="container">
@@ -21,11 +20,10 @@
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
           <div class="card-img-left d-none d-md-flex">
-            <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Registrar</h5>
-            <form action="servidor/registro/registrar.php" method="post">
+            <form action="../servidor/registro/registrar.php" method="post">
 
               <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="usuario" placeholder="usuario" name="usuario" required autofocus>
