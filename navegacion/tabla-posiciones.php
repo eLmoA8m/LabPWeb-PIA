@@ -26,8 +26,16 @@
             </tr>
         </thead>
         <tbody>
-            <?php
             
+            <?php
+            // Obtener la hora del formulario
+$horaFormulario = $_POST['hora'];
+
+// Convertir la hora al formato deseado
+$horaFormateada = date('H:i:s', strtotime($horaFormulario));
+
+// Mostrar la hora formateada
+echo $horaFormateada;
             include "../clases/Conexion.php";
            
             // Realizar la consulta a la base de datos
